@@ -20,7 +20,7 @@
   },
   "files": [
     "dist/*",
-    "src/components/*",
+    "src/components/*"
   ],
   "homepage": "https://github.com/glowfisch8lan/v-data-table-extended",
   "bugs": {
