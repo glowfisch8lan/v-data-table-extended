@@ -9,9 +9,6 @@
   "main": "dist/v-data-table-extended.umd.js",
   "module": "dist/v-data-table-extended.esm.js",
   "unpkg": "dist/v-data-table-extended.min.js",
-  "browser": {
-    "./sfc": "src/DropZone.vue"
-  },
   "scripts": {
     "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
     "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/v-data-table-extended.umd.js",
