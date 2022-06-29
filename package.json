@@ -1,0 +1,49 @@
+{
+  "name": "v-data-table-extended",
+  "version": "1.0.3",
+  "description": "A simple Vue drop uploader plugin",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/glowfisch8lan/v-data-table-extended.git"
+  },
+  "main": "dist/v-data-table-extended.umd.js",
+  "module": "dist/v-data-table-extended.esm.js",
+  "unpkg": "dist/v-data-table-extended.min.js",
+  "browser": {
+    "./sfc": "src/DropZone.vue"
+  },
+  "scripts": {
+    "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
+    "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/v-data-table-extended.umd.js",
+    "build:es": "rollup --config build/rollup.config.js --format es --file dist/v-data-table-extended.esm.js",
+    "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/v-data-table-extended.min.js"
+  },
+  "files": [
+    "dist/*",
+    "src/components/*",
+  ],
+  "homepage": "https://github.com/glowfisch8lan/v-data-table-extended",
+  "bugs": {
+    "url": "https://github.com/glowfisch8lan/v-data-table-extended/issues"
+  },
+  "author": "D. Grigorov",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "sass-loader": "^13.0.2",
+    "vue": "^2.6.14",
+    "vue-cli": "^2.9.6",
+    "vuetify": "^2.6.1"
+  },
+  "devDependencies": {
+    "rollup": "^1.17.0",
+    "node-sass": "^7.0.1",
+    "@vue/cli-service": "^5.0.6",
+    "@vue/cli": "^5.0.6",
+    "rollup-plugin-buble": "^0.19.8",
+    "rollup-plugin-commonjs": "^10.0.1",
+    "rollup-plugin-vue": "^5.0.1",
+    "vue": "^2.6.10",
+    "vue-template-compiler": "^2.6.10"
+  }
+}
