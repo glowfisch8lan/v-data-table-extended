@@ -1,3 +1,6 @@
+/**
+ * Данный класс используется как конфигурация
+ */
 export default class DataTableConfig {
     constructor(config) {
         this.actions = {
@@ -12,6 +15,8 @@ export default class DataTableConfig {
         this.settings = {
             enable: config?.settings?.enable ?? false
         }
+        this.store = config?.store ?? null
+        this.eventBus = config?.eventBus ?? null
 
         /*        this.search = config?.search.show || false
                 this.globalSearch = config?.search.globalSearch || false*/

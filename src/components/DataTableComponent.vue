@@ -169,7 +169,8 @@
                                 :color="inFilter(h.value, filter.value) ? getColor(filter.color_id) : 'grey lighten-1'"
                                 text-color="white"
                                 class="ml-2 mt-2"
-                                v-for="filter in h.filters"
+                                v-for="(filter, hindex) in h.filters"
+                                :key="hindex"
                                 filter @click="filterFunc(h.value, filter.value)">{{ filter.text }}
                             </v-chip>
                           </v-card>
@@ -480,7 +481,7 @@ import breakpointMixin from "./mixins/breakpointMixin";
 import QueryDto from "./dtos/queryDto";
 import checkboxMixin from "./mixins/checkboxMixin";
 import filterMixin from "./mixins/filterMixin";
-import DialogEditAll from './components/DialogEditAll'
+import DialogEditAll from './components/DialogEditAll.vue'
 import colorPicker from "./mixins/colorPicker";
 import settingsMixin from "./mixins/settingsMixin";
 
@@ -523,13 +524,18 @@ export default {
     },
   },
   created() {
+    if (this.config.eventBus === null || this.config.store === null) {
+      throw new Error('Не указан EventBus и Vuex Store в конфигурации таблицы!')
+    }
+
+
     /** Когда необходимо обновить данные */
-    this.$eventBus.$on('data-table-component-refresh', dto => {
+    this.config.eventBus.$on('data-table-component-refresh', dto => {
       this.update()
     });
     /** Когда необходимо синхроинизровать dto */
-    this.$eventBus.$on('data-table-component-sync-dto', dto => {
-      this.dto = {...this.dto, ...dto}
+    this.config.eventBus.$on('data-table-component-sync-dto', dto => {
+      this.dto = Object.assign(this.dto, dto)
     });
     if (this.api) {
       this.update()
@@ -546,7 +552,7 @@ export default {
   },
   computed: {
     loading() {
-      return this.$store?.state?.loading ?? false
+      return this.config.store.state.loading
     },
   },
   methods: {

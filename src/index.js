@@ -1,9 +1,9 @@
-import component from './components/DataTableComponent';
+import component from './components/DataTableComponent.vue';
 
 export function install(Vue) {
     if (install.installed) return;
     install.installed = true;
-    Vue.component('DropZone', component);
+    Vue.component('VDataTableExtended', component);
 }
 
 const plugin = {
