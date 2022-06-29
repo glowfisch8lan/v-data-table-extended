@@ -471,23 +471,22 @@ import searchingMixin from "./mixins/searchingMixin";
 import actionsMixin from "./mixins/actionsMixin";
 import sortMixin from "./mixins/sortMixin";
 import deleteMixin from "./mixins/deleteMixin";
-import truncateMixin from "../../mixins/truncateMixin";
-import lodashMixin from "../../mixins/lodashMixin";
+import truncateMixin from "./mixins/truncateMixin";
+import lodashMixin from "./mixins/lodashMixin";
 import paginationMixin from "./mixins/paginationMixin";
 import configMixin from "./mixins/configMixin";
 import optionsMixin from "./mixins/optionsMixin";
-import ImageViewer from "../../modules/inventory/views/components/ImageViewer";
 import breakpointMixin from "./mixins/breakpointMixin";
 import QueryDto from "./dtos/queryDto";
 import checkboxMixin from "./mixins/checkboxMixin";
 import filterMixin from "./mixins/filterMixin";
 import DialogEditAll from './components/DialogEditAll'
-import colorPicker from "../../mixins/colorPicker";
+import colorPicker from "./mixins/colorPicker";
 import settingsMixin from "./mixins/settingsMixin";
 
 export default {
   name: "List",
-  components: {ImageViewer, DialogEditAll},
+  components: {DialogEditAll},
   mixins: [
     configMixin,
     searchingMixin,
@@ -547,7 +546,7 @@ export default {
   },
   computed: {
     loading() {
-      return this.$store.state.loading
+      return this.$store?.state?.loading ?? false
     },
   },
   methods: {
