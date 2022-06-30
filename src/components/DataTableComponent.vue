@@ -528,7 +528,6 @@ export default {
       throw new Error('Не указан EventBus и Vuex Store в конфигурации таблицы!')
     }
 
-
     /** Когда необходимо обновить данные */
     this.config.eventBus.$on('data-table-component-refresh', dto => {
       this.update()

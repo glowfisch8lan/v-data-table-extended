@@ -1,4 +1,5 @@
 import component from './components/DataTableComponent.vue';
+import DataTableConfig from "./components/DataTableConfig";
 
 export function install(Vue) {
     if (install.installed) return;
@@ -11,6 +12,7 @@ const plugin = {
 };
 
 let GlobalVue = null;
+
 if (typeof window !== 'undefined') {
     GlobalVue = window.Vue;
 } else if (typeof global !== 'undefined') {
@@ -19,5 +21,10 @@ if (typeof window !== 'undefined') {
 if (GlobalVue) {
     GlobalVue.use(plugin);
 }
+
+
+export {
+    DataTableConfig as Config
+};
 
 export default component;
