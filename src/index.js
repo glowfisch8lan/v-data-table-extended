@@ -1,5 +1,6 @@
 import component from './components/DataTableComponent.vue';
 import DataTableConfig from "./components/DataTableConfig";
+import DataTableCheckbox from './components/DataTableCheckbox'
 
 export function install(Vue) {
     if (install.installed) return;
@@ -24,7 +25,7 @@ if (GlobalVue) {
 
 
 export {
-    DataTableConfig as Config
+    DataTableConfig as Config,
+    component as VDataTableExtended,
+    DataTableCheckbox as VDataTableExtendedCheckbox
 };
-
-export default component;

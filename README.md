@@ -1,3 +1,5 @@
+
+!!!README на стадии переделки
 Компонент Таблица:
 
 1. Минимальный набор для отображения данных
@@ -294,13 +296,15 @@ Endpoint должен возвращать items => '',
 6. Настройки
 
 
-9. Кастомизация
-   <template v-slot:column="{ item, header }">
-   <div v-if="header.value === 'tags'">
-   <v-chip-group>
-   <v-chip text-color="white" :color='getColor(chip.color_id)' v-for="chip in _.get(item, header.value, '')"
-   :key="chip.id">{{ chip.name }}
-   </v-chip>
-   </v-chip-group>
-   </div>
-   </template>
+9. Кастомизаци
+````
+     <template v-slot:column="{ item, header }">
+     <div v-if="header.value === 'tags'">
+     <v-chip-group>
+     <v-chip text-color="white" :color='getColor(chip.color_id)' v-for="chip in _.get(item, header.value, '')"
+     :key="chip.id">{{ chip.name }}
+     </v-chip>
+     </v-chip-group>
+     </div>
+     </template>
+````

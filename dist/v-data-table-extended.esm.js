@@ -2262,6 +2262,16 @@ __vue_render__$1._withStripped = true;
     undefined
   );
 
+/**
+ * @class DataTableSort Данный класс используется сортировки
+ */
+class DataTableOptions$2 {
+  constructor() {
+    this.ids = [];
+  }
+
+}
+
 function install(Vue) {
   if (install.installed) return;
   install.installed = true;
@@ -2282,5 +2292,4 @@ if (GlobalVue) {
   GlobalVue.use(plugin);
 }
 
-export default __vue_component__$1;
-export { DataTableConfig as Config, install };
+export { DataTableConfig as Config, __vue_component__$1 as VDataTableExtended, DataTableOptions$2 as VDataTableExtendedCheckbox, install };

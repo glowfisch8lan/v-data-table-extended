@@ -2268,6 +2268,16 @@
         undefined
       );
 
+    /**
+     * @class DataTableSort Данный класс используется сортировки
+     */
+    class DataTableOptions$2 {
+      constructor() {
+        this.ids = [];
+      }
+
+    }
+
     function install(Vue) {
       if (install.installed) return;
       install.installed = true;
@@ -2289,7 +2299,8 @@
     }
 
     exports.Config = DataTableConfig;
-    exports.default = __vue_component__$1;
+    exports.VDataTableExtended = __vue_component__$1;
+    exports.VDataTableExtendedCheckbox = DataTableOptions$2;
     exports.install = install;
 
     Object.defineProperty(exports, '__esModule', { value: true });
