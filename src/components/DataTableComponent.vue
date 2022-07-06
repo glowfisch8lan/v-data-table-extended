@@ -322,8 +322,8 @@
               </v-col>
             </td>
           </tr>
-          <tr v-show="isExpanded(index)">
-            <td :colspan="headers.length">
+          <tr v-show="expandedEnable && isExpanded(index)">
+            <td :colspan="headers.length + 1">
               <slot name="expanded" v-if="item.expanded" v-bind:item="item"></slot>
             </td>
           </tr>
@@ -531,6 +531,10 @@ export default {
       type: Boolean,
       default: false
     },
+    expandedEnable: {
+      default: false,
+      type: Boolean
+    }
   },
   created() {
     if (this.config.eventBus === null || this.config.store === null) {
@@ -576,7 +580,9 @@ export default {
       return this.expanded.hasOwnProperty(index)
     },
     expand(item, index) {
-
+      if (this.expanded === false) {
+        return;
+      }
       if (this.expanded.hasOwnProperty(index)) {
         delete this.expanded$[index];
       } else {

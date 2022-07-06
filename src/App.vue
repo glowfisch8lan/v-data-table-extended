@@ -6,12 +6,11 @@
             :headers="headers"
             :data="data"
             :config="dataTableConfig"
-            expanded
+            expanded-enable
         >
           <template v-slot:expanded="{ item }">
             <div>
               Счета
-              {{ item.expanded }}
             </div>
           </template>
         </v-data-table-extended>

@@ -11,7 +11,7 @@
             :data="data"
             :config="dataTableConfig"
         >
-        </data-table-component>
+        </v-data-table-extended>
     ...
 </template>
 ````
@@ -39,3 +39,5 @@ export default {
     }
 </script>
 ````
+
+![img.png](img.png)
