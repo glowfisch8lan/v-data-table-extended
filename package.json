@@ -1,6 +1,6 @@
 {
   "name": "v-data-table-extended",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Extended Vuetify v-data-table component",
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
   "author": "D. Grigorov",
   "license": "ISC",
   "dependencies": {
+    "@mdi/font": "^6.9.96",
     "lodash": "^4.17.21",
     "portal-vue": "^2.1.7",
     "rollup-plugin-babel": "^4.4.0",

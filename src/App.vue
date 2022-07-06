@@ -1,22 +1,33 @@
 <template>
-  <v-container>
-    <data-table-component
-        :headers="headers"
-        :data="data"
-        :config="dataTableConfig"
-    >
-    </data-table-component>
-  </v-container>
+  <v-app>
+    <v-main>
+      <v-container>
+        <v-data-table-extended
+            :headers="headers"
+            :data="data"
+            :config="dataTableConfig"
+            expanded
+        >
+          <template v-slot:expanded="{ item }">
+            <div>
+              Счета
+              {{ item.expanded }}
+            </div>
+          </template>
+        </v-data-table-extended>
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import DataTableComponent from '../dist/v-data-table-extended.esm';
-import {Config} from '../dist/v-data-table-extended.esm';
+import VDataTableExtended from "./components/DataTableComponent";
+import Config from "./components/DataTableConfig";
 
 export default {
   name: 'App',
   components: {
-    DataTableComponent
+   VDataTableExtended
   },
   computed: {
     headers() {
@@ -28,7 +39,7 @@ export default {
         {
           text: '#',
           value: 'id',
-          width: '10'
+          width: '10',
         },
         {
           text: 'Наименование',
@@ -43,7 +54,7 @@ export default {
         {
           text: '',
           value: 'actions'
-        }
+        },
       ]
     }
   },
@@ -54,9 +65,22 @@ export default {
           id: 1,
           name: 'Товар',
           tags: 1,
+          expanded: {
+            id: 1,
+            name: 'name',
+            img: 'https://avatars.mds.yandex.net/i?id=38b9cde70eb2765b85c65a9fe18c35c8-5115383-images-thumbs&n=13&exp=1'
+          }
         }
       ],
       dataTableConfig: new Config({
+        actions: {
+          create: true,
+          delete: true,
+          edit: true
+        },
+        settings: {
+          enable: true
+        },
         store: this.$store,
         eventBus: this.$eventBus
       }),

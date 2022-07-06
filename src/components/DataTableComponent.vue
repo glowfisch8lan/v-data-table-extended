@@ -91,7 +91,7 @@
       </div>
     </v-card>
 
-    <!-- :search="dto.searching.search"-->
+    <!-- :search="dto.searching.search" убрал так как поиск должен быть только глобальным без внутренней выборки-->
     <v-data-table
         class="elevation-1 mt-4"
         :headers="headers || []"
@@ -102,6 +102,8 @@
         :dense="settings.dense"
         hide-default-header
         hide-default-footer
+
+        :key="uiKey"
     >
       <!--Template при отсутствии данных в таблице-->
       <template v-slot:no-data>
@@ -274,52 +276,59 @@
 
       <!--Template содержимого таблицы - Десктопные устройства-->
       <template v-slot:item="{ item, index, headers }" v-if="isLargeDesktop || isDesktop">
-        <tr v-show="!loading" :class="{ 'opacity' : isOpacityFiltered(item) }">
-          <td v-if="isEnableCheckbox">
-            <v-checkbox v-model="checkbox.ids" multiple :value="item.id"></v-checkbox>
-          </td>
-          <template v-for="header in Object.values(headers)">
-            <td :width="header.width" :key="header.id" v-if="(header.enable || true) && header.text.length > 0">
-              <slot name="column" v-bind:item="item" v-bind:header="header">
-                <v-tooltip bottom :disabled="header.tooltip ||  typeof header.tooltip !== 'undefined'">
-                  <template v-slot:activator="{ on, attrs }">
-                    <div v-bind="attrs" v-on="on">
-                      <div
-                          v-html="settings.dense ? truncate(_.get(item, header.value, '') ,15, '...') : _.get(item, header.value, '')"></div>
-                    </div>
-                  </template>
-                  <div class="pa-2 text-center" style="max-width:250px">
-                    <span v-html="_.get(item, header.value, '')"></span>
-                  </div>
-                </v-tooltip>
-              </slot>
+        <template v-show="!loading" :class="{ 'opacity' : isOpacityFiltered(item) }">
+          <tr @click="expand(item, index)">
+            <td v-if="isEnableCheckbox">
+              <v-checkbox v-model="checkbox.ids" multiple :value="item.id"></v-checkbox>
             </td>
-          </template>
+            <template v-for="header in Object.values(headers)">
+              <td :width="header.width" :key="header.id" v-if="(header.enable || true) && header.text.length > 0">
+                <slot name="column" v-bind:item="item" v-bind:header="header">
+                  <v-tooltip bottom :disabled="header.tooltip ||  typeof header.tooltip !== 'undefined'">
+                    <template v-slot:activator="{ on, attrs }">
+                      <div v-bind="attrs" v-on="on">
+                        <div
+                            v-html="settings.dense ? truncate(_.get(item, header.value, '') ,15, '...') : _.get(item, header.value, '')"></div>
+                      </div>
+                    </template>
+                    <div class="pa-2 text-center" style="max-width:250px">
+                      <span v-html="_.get(item, header.value, '')"></span>
+                    </div>
+                  </v-tooltip>
+                </slot>
+              </td>
+            </template>
+            <td v-if="Object.values(actions).find((item) => item === true)" :width="getActionsWidth">
+              <v-col class="text-right">
+                <slot name="action.prepend" v-bind:item="item"></slot>
+                <v-btn icon color="green darken-3" class="mr-1"
+                       v-if="actions.view"
+                       @click="viewItem(item)">
+                  <v-icon>
+                    mdi-eye
+                  </v-icon>
+                </v-btn>
+                <v-btn icon color="primary" class="mr-1" v-if="actions.edit" @click="editItem(item)">
+                  <v-icon>
+                    mdi-pencil
+                  </v-icon>
+                </v-btn>
+                <v-btn icon color="red darken-3" v-if="actions.delete" @click="deleteItem(item)">
+                  <v-icon>
+                    mdi-delete
+                  </v-icon>
+                </v-btn>
+                <slot name="action.append" v-bind:item="item"></slot>
+              </v-col>
+            </td>
+          </tr>
+          <tr v-show="isExpanded(index)">
+            <td :colspan="headers.length">
+              <slot name="expanded" v-if="item.expanded" v-bind:item="item"></slot>
+            </td>
+          </tr>
+        </template>
 
-          <td v-if="Object.values(actions).find((item) => item === true)" :width="getActionsWidth">
-            <v-col class="text-right">
-              <slot name="action.prepend" v-bind:item="item"></slot>
-              <v-btn icon color="green darken-3" class="mr-1"
-                     v-if="actions.view"
-                     @click="viewItem(item)">
-                <v-icon>
-                  mdi-eye
-                </v-icon>
-              </v-btn>
-              <v-btn icon color="primary" class="mr-1" v-if="actions.edit" @click="editItem(item)">
-                <v-icon>
-                  mdi-pencil
-                </v-icon>
-              </v-btn>
-              <v-btn icon color="red darken-3" v-if="actions.delete" @click="deleteItem(item)">
-                <v-icon>
-                  mdi-delete
-                </v-icon>
-              </v-btn>
-              <slot name="action.append" v-bind:item="item"></slot>
-            </v-col>
-          </td>
-        </tr>
         <!--        <tr>
                   <v-card elevation="0">
                     <v-card-text>
@@ -542,6 +551,8 @@ export default {
   },
   data() {
     return {
+      expanded$: {},
+      uiKey: 0,
       dto: QueryDto.build({
         options: this.options,
         sorting: this.sorting,
@@ -553,8 +564,27 @@ export default {
     loading() {
       return this.config.store.state.loading
     },
+    expanded() {
+      return this.expanded$;
+    }
   },
   methods: {
+    refreshUI(){
+      this.uiKey += 1
+    },
+    isExpanded(index) {
+      return this.expanded.hasOwnProperty(index)
+    },
+    expand(item, index) {
+
+      if (this.expanded.hasOwnProperty(index)) {
+        delete this.expanded$[index];
+      } else {
+        this.expanded$[index] = item
+      }
+
+      this.refreshUI()
+    },
     update() {
       if (this.isEnableCheckbox) {
         this.checkbox.ids = []
