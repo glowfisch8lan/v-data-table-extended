@@ -20,8 +20,9 @@
 </template>
 
 <script>
-import VDataTableExtended from "./components/DataTableComponent";
-import Config from "./components/DataTableConfig";
+//import {VDataTableExtended, Config, VDataTableExtendedCheckbox} from '../dist/v-data-table-extended.esm';
+import VDataTableExtended from '../src/components/DataTableComponent';
+import Config from '../src/components/DataTableConfig'
 
 export default {
   name: 'App',

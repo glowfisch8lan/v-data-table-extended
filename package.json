@@ -1,6 +1,6 @@
 {
   "name": "v-data-table-extended",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "description": "Extended Vuetify v-data-table component",
   "repository": {
     "type": "git",
@@ -10,7 +10,7 @@
   "module": "dist/v-data-table-extended.esm.js",
   "unpkg": "dist/v-data-table-extended.min.js",
   "scripts": {
-    "server": "vue-cli-service serve",
+    "serve": "vue-cli-service serve",
     "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
     "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/v-data-table-extended.umd.js",
     "build:es": "rollup --config build/rollup.config.js --format es --file dist/v-data-table-extended.esm.js",
