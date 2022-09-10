@@ -39,5 +39,3 @@ export default {
     }
 </script>
 ````
-
-![img.png](img.png)
