@@ -19,10 +19,10 @@ if (typeof window !== 'undefined') {
 } else if (typeof global !== 'undefined') {
     GlobalVue = global.Vue;
 }
+
 if (GlobalVue) {
     GlobalVue.use(plugin);
 }
-
 
 export {
     DataTableConfig as Config,

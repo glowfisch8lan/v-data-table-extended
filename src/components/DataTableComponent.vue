@@ -300,7 +300,7 @@
                     </slot>
                   </td>
                 </template>
-                <td v-if="Object.values(actions).find((item) => item === true)" :width="getActionsWidth">
+                <td v-if="Object.values(actions).find((item) => item === true) || expandedEnable" :width="getActionsWidth">
                   <v-col class="text-right">
                     <slot name="action.prepend" v-bind:item="item"></slot>
                     <v-btn icon color="green darken-3" class="mr-1"
@@ -321,7 +321,7 @@
                       </v-icon>
                     </v-btn>
                     <slot name="action.append" v-bind:item="item"></slot>
-                    <v-btn icon @click="expand(item, index)">
+                    <v-btn icon @click="expand(item, index)" v-if="expandedEnable">
                       <v-icon v-if="isExpanded(index)">mdi-menu-up</v-icon>
                       <v-icon v-else>mdi-menu-down</v-icon>
                     </v-btn>
@@ -554,10 +554,12 @@ export default {
     this.config.eventBus.$on('data-table-component-refresh', dto => {
       this.update()
     });
+
     /** Когда необходимо синхроинизровать dto */
     this.config.eventBus.$on('data-table-component-sync-dto', dto => {
       this.dto = Object.assign(this.dto, dto)
     });
+
     if (this.api) {
       this.update()
     }
