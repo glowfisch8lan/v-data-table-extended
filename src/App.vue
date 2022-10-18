@@ -1,10 +1,10 @@
 <template>
   <v-app>
-    <v-main>
       <v-container>
         <v-data-table-extended
             :headers="headers"
             :data="data"
+            disable-title
             :config="dataTableConfig"
             expanded-enable
         >
@@ -15,14 +15,13 @@
           </template>
         </v-data-table-extended>
       </v-container>
-    </v-main>
   </v-app>
 </template>
 
 <script>
-//import {VDataTableExtended, Config, VDataTableExtendedCheckbox} from '../dist/v-data-table-extended.esm';
-import VDataTableExtended from '../src/components/DataTableComponent';
-import Config from '../src/components/DataTableConfig'
+import {VDataTableExtended, Config, VDataTableExtendedCheckbox} from '../dist/v-data-table-extend.esm'
+//import VDataTableExtended from '../src/components/DataTableComponent';
+//import Config from '../src/components/DataTableConfig'
 
 export default {
   name: 'App',
