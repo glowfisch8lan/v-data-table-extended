@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import {VDataTableExtended, Config, VDataTableExtendedCheckbox} from '../dist/v-data-table-extend.esm'
+import {VDataTableExtended, Config, VDataTableExtendedCheckbox} from 'v-data-table-extended'
 //import VDataTableExtended from '../src/components/DataTableComponent';
 //import Config from '../src/components/DataTableConfig'
 
