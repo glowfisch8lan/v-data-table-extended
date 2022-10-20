@@ -115,7 +115,7 @@
         </template>
 
         <template v-slot:progress>
-          <v-overlay :value="loading" v-if="disableOverflowLoading">
+          <v-overlay :value="loading" v-if="!disableOverflowLoading">
             <v-progress-circular
                 indeterminate
                 size="128"
