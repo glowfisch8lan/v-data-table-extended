@@ -1,6 +1,6 @@
 {
   "name": "v-data-table-extended",
-  "version": "0.1.6",
+  "version": "0.1.8",
   "description": "Extended Vuetify v-data-table component",
   "repository": {
     "type": "git",

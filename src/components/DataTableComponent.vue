@@ -1,7 +1,7 @@
 <template>
   <div>
       <v-card class="d-flex" flat>
-        <h2 class="pl-2" v-if="!disableTitle">{{ tableTitle }}</h2>
+        <h2 class="pl-2" v-if="tableTitle.length > 0">{{ tableTitle }}</h2>
 
         <v-spacer></v-spacer>
         <div style="width:25vw">
@@ -521,7 +521,7 @@ export default {
   props: {
     tableTitle: {
       type: String,
-      default: 'Таблица'
+      default: ''
     },
     disableOverflowLoading: {
       type: Boolean,
@@ -542,10 +542,6 @@ export default {
     expandedEnable: {
       default: false,
       type: Boolean
-    },
-    disableTitle: {
-      default: false,
-      type: Boolean,
     },
   },
   created() {

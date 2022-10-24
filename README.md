@@ -3,7 +3,6 @@
 
 Props:
 ````
-disable-title - отключить заголовок таблицы
 :table-title="" Заголовок таблицы
 disable-overflow-loading - отключить прелоадер встроенный
 ````
